@@ -12,7 +12,7 @@ namespace OrderProcessor.Services
             _productProviderFactory = new ProductProviderFactory();
         }
 
-        public (List<string> Tasks, string Name) ProcessOrder(ProductTypes productType, string productName)
+        public (List<string> Tasks, string Name) ProcessOrder(ProductTypes productType, string productName = null)
         {
             IProductProvider provider = _productProviderFactory.GetProviderByProductType(productType.ToString());
             return provider.Execute(productName);
