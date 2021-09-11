@@ -13,9 +13,11 @@ namespace OrderProcessor.Services
             {
                 case ProductTypes.PhysicalProduct:
                     tasks.Add(OPAConstants.GeneratedAPackingSlipForShipping);
+                    tasks.Add(OPAConstants.GeneratedCommissionPaymentToTheAgent);
                     break;
                 case ProductTypes.Book:
                     tasks.Add(OPAConstants.CreatedADuplicatePackingSlipForTheRoyaltyDepartment);
+                    tasks.Add(OPAConstants.GeneratedCommissionPaymentToTheAgent);
                     break;
                 case ProductTypes.Membership:
                     tasks.Add(OPAConstants.ActivatedMembership);

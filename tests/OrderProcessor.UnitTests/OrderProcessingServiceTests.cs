@@ -18,8 +18,9 @@ namespace OrderProcessor.UnitTests
             var product = _orderProcessingService.ProcessOrder(ProductTypes.PhysicalProduct);
             var tasks = product.Tasks;
 
-            Assert.Single(tasks);
+            Assert.Equal(2, tasks.Count);
             Assert.Equal(OPAConstants.GeneratedAPackingSlipForShipping, tasks[0]);
+            Assert.Equal(OPAConstants.GeneratedCommissionPaymentToTheAgent, tasks[1]);
         }
 
         [Fact]
@@ -28,8 +29,9 @@ namespace OrderProcessor.UnitTests
             var product = _orderProcessingService.ProcessOrder(ProductTypes.Book);
             var tasks = product.Tasks;
 
-            Assert.Single(tasks);
+            Assert.Equal(2, tasks.Count);
             Assert.Equal(OPAConstants.CreatedADuplicatePackingSlipForTheRoyaltyDepartment, tasks[0]);
+            Assert.Equal(OPAConstants.GeneratedCommissionPaymentToTheAgent, tasks[1]);
         }
 
         [Fact]
