@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderProcessor.ProductProviders;
+using System;
 using System.Collections.Generic;
 
 namespace OrderProcessor.Services
@@ -8,13 +9,13 @@ namespace OrderProcessor.Services
         public (List<string> Tasks, string Name) ProcessOrder(ProductTypes productType, string productName)
         {
             List<string> tasks = new List<string>();
+            IProductProvider provider = null;
 
             switch (productType)
             {
                 case ProductTypes.PhysicalProduct:
-                    tasks.Add(OPAConstants.GeneratedAPackingSlipForShipping);
-                    tasks.Add(OPAConstants.GeneratedCommissionPaymentToTheAgent);
-                    break;
+                    provider = new PhysicalProductProvider();
+                    return provider.Execute(productName);
                 case ProductTypes.Book:
                     tasks.Add(OPAConstants.CreatedADuplicatePackingSlipForTheRoyaltyDepartment);
                     tasks.Add(OPAConstants.GeneratedCommissionPaymentToTheAgent);
