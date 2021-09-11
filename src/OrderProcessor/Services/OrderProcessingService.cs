@@ -20,9 +20,8 @@ namespace OrderProcessor.Services
                     provider = new BookProvider();
                     return provider.Execute(productName);
                 case ProductTypes.Membership:
-                    tasks.Add(OPAConstants.ActivatedMembership);
-                    tasks.Add(OPAConstants.MembershipEmailSent);
-                    break;
+                    provider = new MembershipProvider();
+                    return provider.Execute(productName);
                 case ProductTypes.Upgrade:
                     tasks.Add(OPAConstants.MembershipUpgraded);
                     tasks.Add(OPAConstants.MembershipUpgradeEmailSent);
