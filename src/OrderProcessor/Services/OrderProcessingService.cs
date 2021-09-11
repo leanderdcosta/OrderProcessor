@@ -17,9 +17,8 @@ namespace OrderProcessor.Services
                     provider = new PhysicalProductProvider();
                     return provider.Execute(productName);
                 case ProductTypes.Book:
-                    tasks.Add(OPAConstants.CreatedADuplicatePackingSlipForTheRoyaltyDepartment);
-                    tasks.Add(OPAConstants.GeneratedCommissionPaymentToTheAgent);
-                    break;
+                    provider = new BookProvider();
+                    return provider.Execute(productName);
                 case ProductTypes.Membership:
                     tasks.Add(OPAConstants.ActivatedMembership);
                     tasks.Add(OPAConstants.MembershipEmailSent);
