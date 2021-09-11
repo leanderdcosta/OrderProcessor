@@ -1,11 +1,11 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 
 namespace OrderProcessor.Services
 {
     public class OrderProcessingService : IOrderProcessingService
     {
-        public List<string> ProcessOrder(ProductTypes productType)
+        public (List<string> Tasks, string Name) ProcessOrder(ProductTypes productType, string productName)
         {
             List<string> tasks = new List<string>();
 
@@ -26,12 +26,17 @@ namespace OrderProcessor.Services
                     tasks.Add(OPAConstants.MembershipUpgradeEmailSent);
                     break;
                 case ProductTypes.Video:
+                    tasks.Add(OPAConstants.GeneratedPackingSlip);
+                    if (productName.Equals(OPAConstants.LearningToSki, StringComparison.OrdinalIgnoreCase))
+                    {
+                        tasks.Add(OPAConstants.FreeFirstAidVideoAddedToThePackingSlip);
+                    }
                     break;
                 default:
                     break;
             }
 
-            return tasks;
+            return (tasks, productName);
         }
     }
 }

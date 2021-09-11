@@ -4,6 +4,6 @@ namespace OrderProcessor.Services
 {
     public interface IOrderProcessingService
     {
-        List<string> ProcessOrder(ProductTypes productType);
+        (List<string> Tasks, string Name) ProcessOrder(ProductTypes productType, string productName = null);
     }
 }
