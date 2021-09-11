@@ -1,8 +1,9 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace OrderProcessor.Services
 {
     public interface IOrderProcessingService
     {
-        void ProcessOrder();
+        List<string> ProcessOrder(ProductTypes productType);
     }
 }
