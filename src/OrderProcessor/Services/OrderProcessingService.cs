@@ -26,12 +26,8 @@ namespace OrderProcessor.Services
                     provider = new UpgradeMembershipProvider();
                     return provider.Execute(productName);
                 case ProductTypes.Video:
-                    tasks.Add(OPAConstants.GeneratedPackingSlip);
-                    if (productName.Equals(OPAConstants.LearningToSki, StringComparison.OrdinalIgnoreCase))
-                    {
-                        tasks.Add(OPAConstants.FreeFirstAidVideoAddedToThePackingSlip);
-                    }
-                    break;
+                    provider = new VideoProvider();
+                    return provider.Execute(productName);
                 default:
                     break;
             }
