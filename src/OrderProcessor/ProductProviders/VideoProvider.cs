@@ -5,6 +5,8 @@ namespace OrderProcessor.ProductProviders
 {
     public class VideoProvider : IProductProvider
     {
+        public string ProductType => nameof(ProductTypes.Video);
+
         public (List<string> Tasks, string Name) Execute(string productName)
         {
             List<string> task = new List<string>();
