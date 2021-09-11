@@ -13,7 +13,7 @@ namespace OrderProcessor.UnitTests
         }
 
         [Fact]
-        public void ProcessOrder_WhenPhysicalProduct_GeneratesPackingSlipForShipping()
+        public void ProcessOrder_WhenPhysicalProduct_GeneratesPackingSlipForShippingAndGeneratesCommission()
         {
             var product = _orderProcessingService.ProcessOrder(ProductTypes.PhysicalProduct);
             var tasks = product.Tasks;
@@ -24,7 +24,7 @@ namespace OrderProcessor.UnitTests
         }
 
         [Fact]
-        public void ProcessOrder_WhenBook_CreateDuplicateSlipForRoyalDept()
+        public void ProcessOrder_WhenBook_CreateDuplicateSlipForRoyalDeptAndGeneratesCommission()
         {
             var product = _orderProcessingService.ProcessOrder(ProductTypes.Book);
             var tasks = product.Tasks;
@@ -59,21 +59,25 @@ namespace OrderProcessor.UnitTests
         [Fact]
         public void ProcessOrder_WhenVideo_GeneratePackingSlip()
         {
-            var product = _orderProcessingService.ProcessOrder(ProductTypes.Video, "General");
+            string videoName = "General";
+
+            var product = _orderProcessingService.ProcessOrder(ProductTypes.Video, videoName);
             var tasks = product.Tasks;
 
             Assert.Single(tasks);
             Assert.Equal(OPAConstants.GeneratedPackingSlip, tasks[0]);
         }
 
-        [Fact]
-        public void ProcessOrder_WhenVideoLearningToSki_AddFreeVideo()
+        [Theory]
+        [InlineData(OPAConstants.LearningToSki)]
+        [InlineData("learning to ski")]
+        public void ProcessOrder_WhenVideoLearningToSki_AddFreeVideo(string videoName)
         {
-            var product = _orderProcessingService.ProcessOrder(ProductTypes.Video, OPAConstants.LearningToSki);
+            var product = _orderProcessingService.ProcessOrder(ProductTypes.Video, videoName);
             var tasks = product.Tasks;
 
             Assert.Equal(2, tasks.Count);
-            Assert.Equal(product.Name, OPAConstants.LearningToSki);
+            Assert.Equal(product.Name, OPAConstants.LearningToSki, ignoreCase: true);
             Assert.Equal(OPAConstants.GeneratedPackingSlip, tasks[0]);
             Assert.Equal(OPAConstants.FreeFirstAidVideoAddedToThePackingSlip, tasks[1]);
         }

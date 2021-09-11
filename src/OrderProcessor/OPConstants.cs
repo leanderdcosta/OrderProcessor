@@ -9,7 +9,7 @@
         public const string MembershipEmailSent = "Membership email sent";
         public const string MembershipUpgradeEmailSent = "Membership upgrade email sent";
         public const string GeneratedPackingSlip = "Generated packing slip";
-        public const string LearningToSki = "learning to ski";
+        public const string LearningToSki = "Learning to Ski";
         public const string FreeFirstAidVideoAddedToThePackingSlip = "Free 'First Aid' video added to the packing slip";
         public const string GeneratedCommissionPaymentToTheAgent = "Generated Commission payment to the agent";
     }
