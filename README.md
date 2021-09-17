@@ -44,3 +44,8 @@ Run the tests in the project in the current directory:
 dotnet test
 ```
 eg. PS C:\OrderProcessor\tests\OrderProcessor.UnitTests> dotnet test
+
+<br>
+
+## Notes
+New rules can be added using decorator design pattern .
